@@ -1,4 +1,4 @@
-node {
+pipeline {
     def app
 
     stage('Clone repository') {
@@ -9,8 +9,10 @@ node {
 
     stage('Mapping maven volumes'){
         agent {
-        image 'maven:alpine'
-        args '-v $HOME/.m2:/root/.m2'
+            docker{
+                image 'maven:alpine'
+                args '-v $HOME/.m2:/root/.m2'
+            }
         }
     }
 
