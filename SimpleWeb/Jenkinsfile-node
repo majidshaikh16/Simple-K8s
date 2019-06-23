@@ -1,19 +1,23 @@
-pipeline {
-    agent {
-        docker {
-            image 'maven:alpine'
-            args '-v $HOME/.m2:/root/.m2'
-        }
-    }
+node {
+    def app
 
-    stages{
-        stage('Clone repository') {
+    stage('Clone repository') {
         /* Let's make sure we have the repository cloned to our workspace */
 
         checkout scm
-        }
+    }
 
-        stage('Build image') {
+    stage('Mapping maven volumes'){
+        agent {
+            docker{
+                image 'maven:alpine'
+                args '-v $HOME/.m2:/root/.m2'
+                reuseNode true
+            }
+        }
+    }
+
+    stage('Build image') {
         /* This builds the actual image; synonymous to
          * docker build on the command line */
         def dockerfile = 'Dockerfile'
@@ -34,10 +38,9 @@ pipeline {
          * First, the incremental build number from Jenkins
          * Second, the 'latest' tag.
          * Pushing multiple tags is cheap, as all the layers are reused. */
-            docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-creds') {
-                // app.push("${env.BUILD_NUMBER}")
-                app.push("majidshaikh16/simple-web:latest")
-            }
+        docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-creds') {
+            // app.push("${env.BUILD_NUMBER}")
+            app.push("majidshaikh16/simple-web:latest")
         }
     }
 }
