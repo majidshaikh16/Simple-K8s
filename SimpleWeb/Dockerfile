@@ -1,4 +1,5 @@
-FROM java:8
+FROM maven:alpine
 WORKDIR /var/apps/simpleweb
-COPY ./target/Simple-Web-exec.jar .
+COPY . .
+RUN mvn clean install
 CMD [ "java", "-jar", "Simple-Web-exec.jar" ]
