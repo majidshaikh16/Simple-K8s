@@ -7,18 +7,19 @@ node {
         checkout scm
     }
 
-    stage('Mapping maven volumes'){
-        docker.image('maven:alpine').inside('-v $HOME/.m2:/root/.m2'){ c->
-            sh 'echo "mounted maven volume..."'
-        }
-    }
-
-    // stage('Build image') {
-    //     /* This builds the actual image; synonymous to
-    //      * docker build on the command line */
-    //     def dockerfile = 'Dockerfile'
-    //     app = docker.build("majidshaikh16/simple-web","-f ./SimpleWeb/${dockerfile} ./SimpleWeb/")
+    // stage('Mapping maven volumes'){
+    //     docker.image('maven:alpine').inside('-v $HOME/.m2:/root/.m2'){ c->
+    //         sh 'echo "mounted maven volume..."'
+    //     }
     // }
+
+    stage('Build image') {
+        /* This builds the actual image; synonymous to
+         * docker build on the command line */
+        def dockerfile = 'Dockerfile'
+        sh 'docker build -t majidshaikh16/simple-web -f ./SimpleWeb/${dockerfile} ./SimpleWeb/'
+        // app = docker.build("majidshaikh16/simple-web","-f ./SimpleWeb/${dockerfile} ./SimpleWeb/")
+    }
 
     // stage('Test image') {
     //     /* Ideally, we would run a test framework against our image.
@@ -36,9 +37,8 @@ node {
          * Pushing multiple tags is cheap, as all the layers are reused. */
         docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-creds') {
             // app.push("${env.BUILD_NUMBER}")
-            def dockerfile = 'Dockerfile'
-            def app = docker.build("majidshaikh16/simple-web","-f ./SimpleWeb/${dockerfile} ./SimpleWeb/")
-            app.push("majidshaikh16/simple-web")
+            sh 'docker push majidshaikh16/simple-web'
+            // app.push("majidshaikh16/simple-web")
             // app.push("latest")
             sh 'echo "pushed to docker hub..."'
         }
