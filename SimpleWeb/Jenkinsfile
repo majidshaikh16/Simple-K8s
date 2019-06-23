@@ -1,5 +1,5 @@
 node {
-    def app
+    
 
     stage('Clone repository') {
         /* Let's make sure we have the repository cloned to our workspace */
@@ -13,12 +13,12 @@ node {
         }
     }
 
-    stage('Build image') {
-        /* This builds the actual image; synonymous to
-         * docker build on the command line */
-        def dockerfile = 'Dockerfile'
-        app = docker.build("majidshaikh16/simple-web","-f ./SimpleWeb/${dockerfile} ./SimpleWeb/")
-    }
+    // stage('Build image') {
+    //     /* This builds the actual image; synonymous to
+    //      * docker build on the command line */
+    //     def dockerfile = 'Dockerfile'
+    //     app = docker.build("majidshaikh16/simple-web","-f ./SimpleWeb/${dockerfile} ./SimpleWeb/")
+    // }
 
     stage('Test image') {
         /* Ideally, we would run a test framework against our image.
@@ -36,7 +36,10 @@ node {
          * Pushing multiple tags is cheap, as all the layers are reused. */
         docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-creds') {
             // app.push("${env.BUILD_NUMBER}")
+            def dockerfile = 'Dockerfile'
+            def app = docker.build("majidshaikh16/simple-web","-f ./SimpleWeb/${dockerfile} ./SimpleWeb/")
             app.push("majidshaikh16/simple-web")
+            // app.push("latest")
             sh 'echo "pushed to docker hub..."'
         }
     }
