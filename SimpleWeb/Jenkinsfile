@@ -7,6 +7,13 @@ node {
         checkout scm
     }
 
+    stage('Build image') {
+        /* This builds the actual image; synonymous to
+         * docker build on the command line */
+        def dockerfile = 'Dockerfile'
+        app = docker.build("majidshaikh16/simple-web","-f ${dockerfile} ./SimpleWeb/")
+    }
+
     stage('Mapping maven volumes'){
         agent {
             docker{
@@ -15,13 +22,6 @@ node {
                 reuseNode true
             }
         }
-    }
-
-    stage('Build image') {
-        /* This builds the actual image; synonymous to
-         * docker build on the command line */
-        def dockerfile = 'Dockerfile'
-        app = docker.build("majidshaikh16/simple-web","-f ${dockerfile} ./SimpleWeb/")
     }
 
     stage('Test image') {
