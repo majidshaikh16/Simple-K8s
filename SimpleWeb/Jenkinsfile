@@ -11,7 +11,7 @@ node {
         /* This builds the actual image; synonymous to
          * docker build on the command line */
         def dockerfile = 'Dockerfile'
-        app = docker.build("majidshaikh16/simple-web","-f ${dockerfile} ./SimpleWeb/")
+        app = docker.build("majidshaikh16/simple-web","-f ./SimpleWeb/${dockerfile} ./SimpleWeb/")
     }
 
     stage('Mapping maven volumes'){
