@@ -1,15 +1,17 @@
 node {
     def app
 
-    agent {
-        image 'maven:alpine'
-        args '-v $HOME/.m2:/root/.m2'
-    }
-
     stage('Clone repository') {
         /* Let's make sure we have the repository cloned to our workspace */
 
         checkout scm
+    }
+
+    stage('Mapping maven volumes'){
+        agent {
+        image 'maven:alpine'
+        args '-v $HOME/.m2:/root/.m2'
+        }
     }
 
     stage('Build image') {
