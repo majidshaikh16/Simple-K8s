@@ -35,12 +35,15 @@ node {
          * First, the incremental build number from Jenkins
          * Second, the 'latest' tag.
          * Pushing multiple tags is cheap, as all the layers are reused. */
-        docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-creds') {
-            // app.push("${env.BUILD_NUMBER}")
-            // sh 'docker push majidshaikh16/simple-web'
-            app.push("majidshaikh16/simple-web")
-            app.push("latest")
-            sh 'echo "pushed to docker hub..."'
-        }
+        // docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-creds') {
+        //     // app.push("${env.BUILD_NUMBER}")
+        //     // sh 'docker push majidshaikh16/simple-web'
+        //     app.push("majidshaikh16/simple-web")
+        //     app.push("latest")
+        //     sh 'echo "pushed to docker hub..."'
+        // }
+
+        sh 'echo majidfordockerp@ssw0rd | docker login'
+        sh 'docker push majidshaikh16/simple-web'
     }
 }
