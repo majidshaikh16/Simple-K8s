@@ -19,6 +19,7 @@ node {
         def dockerfile = 'Dockerfile'
         // sh 'docker build -t majidshaikh16/simple-web -f ./SimpleWeb/${dockerfile} ./SimpleWeb/'
         app = docker.build("majidshaikh16/simple-web","-f ./SimpleWeb/${dockerfile} ./SimpleWeb/")
+        app.push()
     }
 
     // stage('Test image') {
@@ -30,20 +31,20 @@ node {
     //     }
     // }
 
-    stage('Push image') {
-        /* Finally, we'll push the image with two tags:
-         * First, the incremental build number from Jenkins
-         * Second, the 'latest' tag.
-         * Pushing multiple tags is cheap, as all the layers are reused. */
-        // docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-creds') {
-        //     // app.push("${env.BUILD_NUMBER}")
-        //     // sh 'docker push majidshaikh16/simple-web'
-        //     app.push("majidshaikh16/simple-web")
-        //     app.push("latest")
-        //     sh 'echo "pushed to docker hub..."'
-        // }
+    // stage('Push image') {
+    //     /* Finally, we'll push the image with two tags:
+    //      * First, the incremental build number from Jenkins
+    //      * Second, the 'latest' tag.
+    //      * Pushing multiple tags is cheap, as all the layers are reused. */
+    //     // docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-creds') {
+    //     //     // app.push("${env.BUILD_NUMBER}")
+    //     //     // sh 'docker push majidshaikh16/simple-web'
+    //     //     app.push("majidshaikh16/simple-web")
+    //     //     app.push("latest")
+    //     //     sh 'echo "pushed to docker hub..."'
+    //     // }
 
-        sh 'echo majidfordockerp@ssw0rd | docker login'
-        sh 'docker push majidshaikh16/simple-web'
-    }
+    //     sh 'echo majidfordockerp@ssw0rd | docker login'
+    //     sh 'docker push majidshaikh16/simple-web'
+    // }
 }
