@@ -6,7 +6,7 @@ node{
         def customImage = docker.build("majidshaikh16/simple-web1","-f ./SimpleWeb/${dockerfile} ./SimpleWeb/")
     customImage.push()
 
-    customImage.push('${env.BUILD_NUMBER}')
+    customImage.push('staging')
     }
     
 }
