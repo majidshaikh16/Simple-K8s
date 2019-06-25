@@ -43,7 +43,7 @@ node {
         //     sh 'echo "pushed to docker hub..."'
         // }
         sh 'docker login'
-        sh 'docker push majidshaikh16/simple-web' 
-        
+        sh 'docker push majidshaikh16/simple-web'  
+
     }
 }
