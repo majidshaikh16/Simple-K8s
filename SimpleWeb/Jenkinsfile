@@ -18,7 +18,7 @@ node {
          * docker build on the command line */
         def dockerfile = 'Dockerfile'
         // sh 'docker build -t majidshaikh16/simple-web -f ./SimpleWeb/${dockerfile} ./SimpleWeb/'
-        app = docker.build("majidshaikh16/simple-web","-f ./SimpleWeb/${dockerfile} ./SimpleWeb/")
+        app = docker.build("simple-web","-f ./SimpleWeb/${dockerfile} ./SimpleWeb/")
     }
 
     // stage('Test image') {
@@ -38,7 +38,7 @@ node {
         docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-creds') {
             // app.push("${env.BUILD_NUMBER}")
             // sh 'docker push majidshaikh16/simple-web'
-            app.push("majidshaikh16/simple-web")
+            app.push("simple-web")
             app.push("latest")
             sh 'echo "pushed to docker hub..."'
         }
