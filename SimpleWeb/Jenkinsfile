@@ -15,7 +15,7 @@ node {
         /* This builds the actual image; synonymous to
          * docker build on the command line */
         def dockerfile = 'Dockerfile'
-        app = docker.build("majidshaikh16/simple-web","-f ./SimpleWeb/${dockerfile} ./SimpleWeb/")
+        app = docker.build("majidshaikh16/simple-web1","-f ./SimpleWeb/${dockerfile} ./SimpleWeb/")
     }
 
     stage('Test image') {
@@ -33,7 +33,8 @@ node {
          * Second, the 'latest' tag.
          * Pushing multiple tags is cheap, as all the layers are reused. */
         docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-creds') {
-            app.push("majidshaikh16/simple-web1:{env.BUILD_NUMBER}")
+            app.push("majidshaikh16/simple-web1:${env.BUILD_NUMBER}")
+            sh 'echo "pushed to docker hub..."'
         }
 
     }
