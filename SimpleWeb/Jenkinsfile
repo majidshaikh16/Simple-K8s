@@ -1,6 +1,8 @@
 node{
     checkout scm
-    def customImage = docker.build("my-image:${env.BUILD_ID}")
+     def dockerfile = 'Dockerfile'
+        // sh 'docker build -t majidshaikh16/simple-web -f ./SimpleWeb/${dockerfile} ./SimpleWeb/'
+    def customImage = docker.build("majidshaikh16/simple-web","-f ./SimpleWeb/${dockerfile} ./SimpleWeb/")
     customImage.push()
 
     customImage.push('latest')
