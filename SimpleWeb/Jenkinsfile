@@ -7,7 +7,7 @@ node{
 
     stage('compile and test'){
         sh 'cd SimpleWeb/'
-        sh "${mvn} clean install" 
+        sh "${mvn} clean install SimpleWeb/" 
     }
 
     stage('Build and Push'){    
