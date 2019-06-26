@@ -1,13 +1,13 @@
 node{
     def mvn = tool (name: 'maven3', type: 'maven') + '/bin/mvn'
-    
+
     stage('checkout to SCM'){
         checkout scm
     }
 
     stage('compile and test'){
         sh 'cd SimpleWeb/'
-        sh "${mvn} clean package"
+        sh "${mvn} clean package" 
     }
 
     stage('Build and Push'){    
