@@ -3,6 +3,11 @@ node{
         checkout scm
     }
 
+    stage('compile and test'){
+        def mvn = tool name: 'maven3', type: 'maven'
+        sh "${mvn}/bin/mvn package"
+    }
+
     stage('Build and Push'){    
         def dockerfile = 'Dockerfile'
             // sh 'docker build -t majidshaikh16/simple-web -f ./SimpleWeb/${dockerfile} ./SimpleWeb/'
