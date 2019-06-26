@@ -5,7 +5,7 @@ node{
 
     stage('compile and test'){
         def mvn = tool name: 'maven3', type: 'maven'
-        sh "${mvn}/bin/mvn package"
+        sh "/SimpleWeb/${mvn}/bin/mvn package"
     }
 
     stage('Build and Push'){    
