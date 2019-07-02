@@ -9,19 +9,19 @@ node{
         sh "cd SimpleWeb/ && ${mvn} clean install"
     }
 
-    // stage('Build and Push'){    
-    //     def dockerfile = 'Dockerfile'
-    //         // sh 'docker build -t majidshaikh16/simple-web -f ./SimpleWeb/${dockerfile} ./SimpleWeb/'
-    //     docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-creds') {
-    //         def customImage = docker.build("majidshaikh16/simple-web1","-f ./SimpleWeb/${dockerfile} ./SimpleWeb/")
-    //         customImage.push()
-    //         customImage.push('staging')        
-    //     }
+    stage('Build and Push'){    
+        def dockerfile = 'Dockerfile'
+            // sh 'docker build -t majidshaikh16/simple-web -f ./SimpleWeb/${dockerfile} ./SimpleWeb/'
+        docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-creds') {
+            def customImage = docker.build("majidshaikh16/simple-web1","-f ./SimpleWeb/${dockerfile} ./SimpleWeb/")
+            customImage.push()
+            customImage.push('staging')        
+        }
 
-    // }
+    }
 
-    stage('Run and up'){
-        sh 'cd SimpleWeb/ && docker-compose up -d' 
+    stage('stop old and up'){
+        docker.image("majidshaikh16/simple-web1:staging").run("-p 8085:8085")
     }
     
 }

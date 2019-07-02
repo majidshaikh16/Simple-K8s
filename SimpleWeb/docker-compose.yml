@@ -1,7 +1,7 @@
 version: '3.5'
 services:
   simpleweb:
-    build: .
+    image: majidshaikh16/simple-web1:staging
     ports:
       - 8085:8085
         
