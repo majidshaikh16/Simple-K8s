@@ -21,7 +21,7 @@ node{
     // }
 
     stage('Run and up'){
-        sh 'cd SimpleWeb/ && docker-compose up'
+        sh 'cd SimpleWeb/ && docker-compose up -d'
     }
     
 }
