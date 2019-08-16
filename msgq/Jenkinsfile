@@ -6,7 +6,7 @@ node{
     }
 
     stage('compile and test'){
-        sh "cd msgq/ && ${mvn} clean install"
+        sh "cd msgq/ && ${mvn} clean install -DskipTests"
     }
 
     stage('Push Rabbit-mq image'){    
