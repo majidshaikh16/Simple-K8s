@@ -5,9 +5,9 @@ node{
         checkout scm
     }
 
-    // stage('compile and test'){
-    //     sh "cd msgq/ && ${mvn} clean install"
-    // }
+    stage('compile and test'){
+        sh "cd msgq/ && ${mvn} clean install"
+    }
 
     stage('Push Rabbit-mq image'){    
         def dockerfile = 'Dockerfile'
