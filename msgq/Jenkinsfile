@@ -13,8 +13,8 @@ node{
         def dockerfile = 'Dockerfile'
             // sh 'docker build -t majidshaikh16/simple-web -f ./msgq/${dockerfile} ./msgq/'
         docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-creds') {
-            def customImage = docker.build("majidshaikh16/rabbit-mq","-f ./msgq/${dockerfile} ./msgq/")
-            // customImage.push()
+            def customImage = docker.build("majidshaikh16/rabbit-mq-apis","-f ./msgq/${dockerfile} ./msgq/")
+            customImage.push()
             // customImage.push('staging')        
         }
 
