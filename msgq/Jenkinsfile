@@ -5,15 +5,15 @@ node{
         checkout scm
     }
 
-    stage('compile and test'){
-        sh "cd SimpleWeb/ && ${mvn} clean install"
-    }
+    // stage('compile and test'){
+    //     sh "cd msgq/ && ${mvn} clean install"
+    // }
 
-    stage('Build and Push'){    
+    stage('Push Rabbit-mq image'){    
         def dockerfile = 'Dockerfile'
-            // sh 'docker build -t majidshaikh16/simple-web -f ./SimpleWeb/${dockerfile} ./SimpleWeb/'
+            // sh 'docker build -t majidshaikh16/simple-web -f ./msgq/${dockerfile} ./msgq/'
         docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-creds') {
-            def customImage = docker.build("majidshaikh16/simple-web1","-f ./SimpleWeb/${dockerfile} ./SimpleWeb/")
+            def customImage = docker.build("majidshaikh16/rabbit-mq","-f ./msgq/${dockerfile} ./msgq/")
             // customImage.push()
             // customImage.push('staging')        
         }
@@ -21,7 +21,7 @@ node{
     }
 
     stage('stop old and up'){
-        sh 'cd SimpleWeb/ && docker-compose stop && docker-compose rm -f && docker-compose up -d'
+        sh 'cd msgq/ && docker-compose stop && docker-compose rm -f && docker-compose up -d'
     }
     
 }
