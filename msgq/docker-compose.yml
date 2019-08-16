@@ -1,0 +1,15 @@
+version: '3'
+services:
+        rabbit-mq:
+                image: rabbitmq:3-management
+                ports:
+                        - 15672:15672
+                        - 5672:5672
+        msg-api:
+                image: msg-queue-api-service
+                ports:
+                        - 8081:8081
+                environment:
+                        - SPRING_RABBITMQ_HOST=10.0.60.234
+                        - SERVER_PORT=8081
+                          

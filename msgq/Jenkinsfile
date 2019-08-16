@@ -1,0 +1,27 @@
+node{
+    def mvn = tool (name: 'maven3', type: 'maven') + '/bin/mvn'
+
+    stage('checkout to SCM'){
+        checkout scm
+    }
+
+    stage('compile and test'){
+        sh "cd SimpleWeb/ && ${mvn} clean install"
+    }
+
+    stage('Build and Push'){    
+        def dockerfile = 'Dockerfile'
+            // sh 'docker build -t majidshaikh16/simple-web -f ./SimpleWeb/${dockerfile} ./SimpleWeb/'
+        docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-creds') {
+            def customImage = docker.build("majidshaikh16/simple-web1","-f ./SimpleWeb/${dockerfile} ./SimpleWeb/")
+            // customImage.push()
+            // customImage.push('staging')        
+        }
+
+    }
+
+    stage('stop old and up'){
+        sh 'cd SimpleWeb/ && docker-compose stop && docker-compose rm -f && docker-compose up -d'
+    }
+    
+}

@@ -1,2 +1,1 @@
-# Test
-
+Training projects. 
