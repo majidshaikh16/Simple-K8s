@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: worker-api-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: worker-api
+  template:
+    metadata:
+      labels:
+        component: worker-api
+    spec:
+      containers:
+        - name: worker-api
+          image: majidshaikh16/rabbit-mq-worker-apis:latest
+          ports:
+            - containerPort: 8086          

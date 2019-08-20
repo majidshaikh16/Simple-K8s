@@ -1,10 +1,28 @@
 version: '3'
 services:
+        db:
+                image: postgres
+                restart: always
+                ports:
+                        - 5432:5432
+                volumes:
+                        - /home/webwerks/Documents/Study/RabbitMq/rabbit-mq/postgres-data:/var/lib/postgresql/data
+        adminer:
+                image: adminer
+                restart: always
+                ports:
+                        - 8083:8080
         rabbit-mq:
                 image: rabbitmq:3-management
                 ports:
-                        - 15672:15672
                         - 5672:5672
+                        - 15672:15672
+        msg-api-server:
+                image: msg-queue-api-server
+                ports:
+                        - 8086:8086
+                environment:
+                        - SERVER_PORT=8086
         msg-api:
                 image: msg-queue-api-service
                 ports:
@@ -12,4 +30,4 @@ services:
                 environment:
                         - SPRING_RABBITMQ_HOST=10.0.60.234
                         - SERVER_PORT=8081
-                          
+

@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: event-api-deployement
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: event-api
+  template:
+    metadata:
+      labels:
+        component: event-api
+    spec:
+      containers:
+        - name: event-api
+          image: majidshaikh16/rabbit-mq-event-apis:latest
+          ports:
+            - containerPort: 8081        

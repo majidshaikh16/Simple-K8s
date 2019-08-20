@@ -5,9 +5,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.amqp.AmqpRejectAndDontRequeueException;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.RestTemplate;
 
 import com.dpk.config.ApplicationConfigReader;
 import com.dpk.dto.UserDetails;
@@ -25,6 +28,8 @@ import reactor.util.concurrent.Queues;
 
 @Service
 public class MessageListener<T> {
+	@Value("${msg.server.url}")
+	private String msgServerUrl;
 	private Flux<UserDetails> flux;
     private static final Logger log = LoggerFactory.getLogger(MessageListener.class);
     
@@ -51,7 +56,9 @@ public class MessageListener<T> {
     		//TODO: Code to make REST call
 //    		callWebService(data);
     		this.sseFluxProcessor.onNext(data);
-        	log.info("<< Exiting receiveMessageForApp1() after API call.");
+    		RestTemplate restTemplate = new RestTemplate();
+    		ResponseEntity<Boolean> responseEntity = restTemplate.postForEntity(msgServerUrl, data, Boolean.class);
+        	log.info("<< Exiting receiveMessageForApp1() after API call : ",responseEntity.getBody());
     	} catch(HttpClientErrorException  ex) {
     		
     		if(ex.getStatusCode() == HttpStatus.NOT_FOUND) {

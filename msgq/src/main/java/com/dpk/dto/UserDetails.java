@@ -2,9 +2,6 @@ package com.dpk.dto;
 
 import java.io.Serializable;
 
-import org.springframework.beans.factory.annotation.Required;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public final class UserDetails implements Serializable{
