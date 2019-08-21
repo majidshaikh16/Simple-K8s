@@ -2,8 +2,12 @@ package com.main.SimpleWeb;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
+@EntityScan(value="com.main.SimpleWeb.entity")
+@EnableJpaRepositories(value="com.main.SimpleWeb.repository")
 public class SimpleWebApplication {
 
 	public static void main(String[] args) {
