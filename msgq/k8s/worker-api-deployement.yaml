@@ -30,4 +30,6 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: pgpassword
-                  key: PGPASSWORD                             
+                  key: PGPASSWORD   
+
+# kubectl create secret generic rabbitpassword --from-literal RABBITPASSWORD=guest                                            
