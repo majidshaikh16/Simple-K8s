@@ -1,5 +1,7 @@
 package com.main.SimpleWeb.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,6 +12,7 @@ import com.main.SimpleWeb.repository.OrderRepository;
 public class OrderService {
 	@Autowired
 	private OrderRepository orderRepository;
+
 	public boolean addOrder(OrderDetails entity) {
 		try {
 			orderRepository.save(entity);
@@ -17,7 +20,10 @@ public class OrderService {
 		} catch (Exception e) {
 			return false;
 		}
-		
-		
+
+	}
+
+	public List<OrderDetails> getOrders() {
+		return (List<OrderDetails>) orderRepository.findAll();
 	}
 }
