@@ -14,14 +14,14 @@ spec:
             backend:
               serviceName: event-api-cluster-ip-service    
               servicePort: 8081
-          - path: /worker-api(/|$)(.*)
-            backend:
-              serviceName: worker-api-cluster-ip-service
-              servicePort: 8086
           - path: /(/|$)(.*)
             backend:
               serviceName: adminer-cluster-ip-service
-              servicePort: 8083
+              servicePort: 8083    
+          - path: /worker-api(/|$)(.*)
+            backend:
+              serviceName: worker-api-cluster-ip-service
+              servicePort: 8086          
           - path: /rabbit(/|$)(.*)
             backend:
               serviceName: rabbit-mq-admin-cluster-ip-service
