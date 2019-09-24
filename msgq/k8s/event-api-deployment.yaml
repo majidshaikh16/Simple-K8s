@@ -29,6 +29,6 @@ spec:
             - name: RABBIT_PASSWORD
               value: guest
             - name: WORKER_HOST
-              value: worker-api-cluser-ip-service
+              value: worker-api-cluster-ip-service
             - name: WORKER_PORT
               value: '8086'                  
