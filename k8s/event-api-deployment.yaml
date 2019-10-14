@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: event-api-deployement
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: event-api
+  template:
+    metadata:
+      labels:
+        component: event-api
+    spec:
+      containers:
+        - name: event-api
+          image: majidshaikh16/rabbit-mq-event-apis:latest
+          ports:
+            - containerPort: 8081
+          env:
+            - name: SERVER_PORT
+              value: '8081'
+            - name: RABBIT_HOST
+              value: rabbit-mq-cluster-ip-service
+            - name: RABBIT_PORT
+              value: '5672'
+            - name: RABBIT_USERNAME
+              value: guest
+            - name: RABBIT_PASSWORD
+              value: guest
+            - name: WORKER_HOST
+              value: worker-api-cluster-ip-service
+            - name: WORKER_PORT
+              value: '8086'                  

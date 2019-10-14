@@ -67,11 +67,11 @@
 							<goal>repackage</goal>
 						</goals>
 						<configuration>
-							<archive>
-								<manifest>
-									<mainClass>com.dpk.MsgqApplication</mainClass>
-								</manifest>
-							</archive>
+							<!--<archive>-->
+								<!--<manifest>-->
+									<!--<mainClass>com.dpk.MsgqApplication</mainClass>-->
+								<!--</manifest>-->
+							<!--</archive>-->
 							<classifier>exec</classifier>
 						</configuration>
 					</execution>

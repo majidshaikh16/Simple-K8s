@@ -1,0 +1,8 @@
+com/dpk/dto/UserDetails.class
+com/dpk/ServletInitializer.class
+com/dpk/util/ApplicationConstant.class
+com/dpk/MsgqApplication.class
+com/dpk/UserService.class
+com/dpk/MessageListener.class
+com/dpk/config/ApplicationConfigReader.class
+com/dpk/MessageSender.class
