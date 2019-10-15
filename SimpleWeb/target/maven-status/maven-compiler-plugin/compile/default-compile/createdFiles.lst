@@ -1,6 +1,0 @@
-com/main/SimpleWeb/service/OrderService.class
-com/main/SimpleWeb/repository/OrderRepository.class
-com/main/SimpleWeb/controller/WelcomeController.class
-com/main/SimpleWeb/controller/OrderController.class
-com/main/SimpleWeb/SimpleWebApplication.class
-com/main/SimpleWeb/entity/OrderDetails.class
