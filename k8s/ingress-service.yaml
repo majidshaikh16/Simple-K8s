@@ -11,19 +11,19 @@ spec:
   rules:
     - http:
         paths:
-          - path: /worker/api/?(.*) #this means any request url needs to forworded to the below cluster ip
+          - path: /?(.*) #this means any request url needs to forworded to the below cluster ip
             backend:
               serviceName: worker-api-cluster-ip-service
               servicePort: 8086        
-          - path: /event/api/?(.*)
-            backend:
-              serviceName: event-api-cluster-ip-service    
-              servicePort: 8081
-          - path: /?(.*)
-            backend:
-              serviceName: adminer-cluster-ip-service
-              servicePort: 8083
-          - path: /rabbit/?(.*)
-            backend:
-              serviceName: rabbit-mq-admin-cluster-ip-service
-              servicePort: 15672
+#          - path: /event/api/?(.*)
+#            backend:
+#              serviceName: event-api-cluster-ip-service
+#              servicePort: 8081
+#          - path: /?(.*)
+#            backend:
+#              serviceName: adminer-cluster-ip-service
+#              servicePort: 8083
+#          - path: /rabbit/?(.*)
+#            backend:
+#              serviceName: rabbit-mq-admin-cluster-ip-service
+#              servicePort: 15672
