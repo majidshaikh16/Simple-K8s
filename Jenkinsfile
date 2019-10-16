@@ -35,10 +35,10 @@ node{
 
     }
 
-     stage('deploy and remove old build from Kubernetes'){
-         sh 'kubectl delete -f k8s'
-         sh 'kubectl apply -f k8s'
-     }
+    // stage('deploy and remove old build from Kubernetes'){
+    //     sh 'kubectl delete -f k8s'
+    //     sh 'kubectl apply -f k8s'
+    // }
 
     // stage('stop old and up'){
     //     sh 'cd msgq/ && docker-compose stop && docker-compose rm -f && docker-compose up -d'
