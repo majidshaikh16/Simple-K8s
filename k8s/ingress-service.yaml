@@ -11,7 +11,7 @@ spec:
   rules:
     - http:
         paths:
-          - path: /?(.*) #this means any request url needs to forworded to the below cluster ip
+          - path: / #this means any request url needs to forworded to the below cluster ip
             backend:
               serviceName: worker-api-cluster-ip-service
               servicePort: 8086        
